@@ -5,3 +5,15 @@ entrypoint: gunicorn -k uvicorn.workers.UvicornWorker main:app
 runtime_config:
     operating_system: "ubuntu22"
     runtime_version: "3.10"
+
+handlers:
+- url: /.*
+  script: auto
+
+health_check:
+  enable_health_check: True
+  check_interval_sec: 5
+  timeout_sec: 4
+  unhealthy_threshold: 2
+  healthy_threshold: 2
+  restart_threshold: 60
